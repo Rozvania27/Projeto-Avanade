@@ -11,6 +11,41 @@ This project is a consumer satisfaction survey focused on the **impact of basic 
 It uses a new, clean data structure and modern backend stack to collect, store, and analyze responses.
 
 ---
+## 🧭 Class Diagram (Mermaid)
+
+``` mermaid
+classDiagram
+    class SurveyResponse {
+        +Long id
+        +String consumerName
+        +Boolean feltDifference
+        +LocalDateTime responseDate
+    }
+
+    class SurveyResponseRepository {
+        <<interface>>
+        +List~SurveyResponse~ findAll()
+        +SurveyResponse save(SurveyResponse response)
+    }
+
+    class SurveyResponseService {
+        -SurveyResponseRepository repository
+        +List~SurveyResponse~ listAll()
+        +SurveyResponse save(SurveyResponse response)
+        +long countYes()
+        +long countNo()
+    }
+
+    class SurveyResponseController {
+        -SurveyResponseService service
+        +List~SurveyResponse~ getAll()
+        +SurveyResponse submit(SurveyResponse response)
+        +Map~String, Long~ getStats()
+    }
+
+    SurveyResponseService --> SurveyResponseRepository
+    SurveyResponseController --> SurveyResponseService
+```
 
 ## ⚙️ Technologies Used
 
