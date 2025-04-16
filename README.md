@@ -6,8 +6,8 @@ This is a RESTful API built with **Spring Boot 3**, **Java 24**, and **PostgreSQ
 
 ## 📌 Project Description
 
-This project is a consumer satisfaction survey focused on the **impact of basic food basket prices**. Users respond with a **simple "Yes" or "No"** to indicate whether they have felt a difference in their monthly budget.
-
+This project is a consumer satisfaction survey focused on the impact of basic food basket prices.<br>
+Users respond with a simple **"Yes" or "No"** to indicate whether they have felt a difference in their monthly budget.<br>
 It uses a new, clean data structure and modern backend stack to collect, store, and analyze responses.
 
 ---
@@ -15,51 +15,50 @@ It uses a new, clean data structure and modern backend stack to collect, store, 
 
 ``` mermaid
 classDiagram
-    class SurveyResponse {
-        +Long id
-        +String consumerName
-        +Boolean feltDifference
-        +LocalDateTime responseDate
+    class MarketResearch {
+        +String project
+        +String objective
+        +String[] target_audience
+        +String[] trends
+        +String[] opportunities
+        +String[] challenges
+        +String conclusion
     }
 
-    class SurveyResponseRepository {
-        <<interface>>
-        +List~SurveyResponse~ findAll()
-        +SurveyResponse save(SurveyResponse response)
+    class Technologies {
+        +String backend
+        +String language
+        +String deploy
+        +String database
+        +String[] protocols
     }
 
-    class SurveyResponseService {
-        -SurveyResponseRepository repository
-        +List~SurveyResponse~ listAll()
-        +SurveyResponse save(SurveyResponse response)
-        +long countYes()
-        +long countNo()
+    class Competitor {
+        +String name
+        +String description
+        +String[] advantages
+        +String[] disadvantages
     }
 
-    class SurveyResponseController {
-        -SurveyResponseService service
-        +List~SurveyResponse~ getAll()
-        +SurveyResponse submit(SurveyResponse response)
-        +Map~String, Long~ getStats()
-    }
+    MarketResearch "1" --> "1" Technologies : uses
+    MarketResearch "1" --> "*" Competitor : analyzes
+    Competitor "*" --> "1" MarketResearch : influences
+    Technologies "1" --> "1" MarketResearch : supports
+    Competitor "*" --> "1" Technologies : compares_with
+  
 
-    SurveyResponseService --> SurveyResponseRepository
-    SurveyResponseController --> SurveyResponseService
+        
 ```
 
 ## ⚙️ Technologies Used
 
-- Java 24  
-- Spring Boot 3  
-- PostgreSQL  
-- Railway (Cloud Deployment)  
-- Maven  
-- Lombok  
+- Java 24
+- Spring Boot 3.4.4
+- PostgreSQL
+- Railway (Cloud Deployment)
+- Maven
+- Mermaid for documentation 
 
 ---
 
-## 🚀 How to Run Locally
 
-```bash
-git clone https://github.com/your-user/market-survey-api.git
-cd market-survey-api
